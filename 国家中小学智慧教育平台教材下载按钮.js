@@ -6,6 +6,7 @@
 // @author       300g-BoHeYou
 // @match        https://www.zxx.edu.cn/tchMaterial/*
 // @icon         https://www.zxx.edu.cn/favicon.ico
+// @license MIT
 // @grant        GM_download
 // @grant        GM_addElement
 // @grant        GM_log
