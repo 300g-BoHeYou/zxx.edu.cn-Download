@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         国家中小学智慧教育平台教材下载按钮
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      2.1
 // @description  用于下载国家中小学智慧教育平台的教材
 // @author       300g-BoHeYou
 // @match        https://www.zxx.edu.cn/tchMaterial/*
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @icon         https://www.zxx.edu.cn/favicon.ico
 // @grant        GM_download
 // @grant        GM_addElement
 // @grant        GM_log
@@ -14,20 +14,14 @@
 
 (function() {
     'use strict';
-    //begin
-    //function downloadUrl(){ // 下载链接
-    //GM_download(performance.getEntriesByType('resource').filter(entry =>{return /.*pdf\.pdf/.test(entry.name);})[0].name)
-    //}
+    GM_addElement(document.body,"input", {type:"button",value:"下载pdf",title:"download",class:"downloadbtn"});
 
+    document.getElementsByClassName("downloadbtn")[0].onclick = function(){
+        GM_download({
+            url:performance.getEntriesByType('resource').filter(entry =>{return /.*pdf\.pdf/.test(entry.name);})[0].name,
+            name:document.title.split('·')[1]+".pdf",
+            saveAs: true
+        })
+    };
 
-
-    GM_addElement(document.body,"input", {type:"button",value:"Download",title:"download",class:"downloadbtn"});
-
- document.getElementsByClassName("downloadbtn")[0].onclick = function(){GM_download(performance.getEntriesByType('resource').filter(entry =>{return /.*pdf\.pdf/.test(entry.name);})[0].name)};
-
-
-
-
-
-    //end
 })();
