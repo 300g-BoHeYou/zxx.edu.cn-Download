@@ -21,14 +21,16 @@
         download.appendChild(download_div);
         download_div.style = 'width:150px;text-align:right;';
         download_div.innerHTML = '<span class="downloadbtn" style="color:white;padding:10px 20px;border-radius:10px;background:red">下载pdf</span>';
-
         document.getElementsByClassName("downloadbtn")[0].onclick = function(){
-            GM_download({
-                url:performance.getEntriesByType('resource').filter(entry =>{return /.*pdf\.pdf/.test(entry.name);})[0].name,
-                name:document.title.split('·')[1]+".pdf",
-                saveAs: true
-            })
+            window.open(performance.getEntriesByType('resource').filter(entry =>{return /viewer\.html/.test(entry.name);})[0].name)
+            GM_log(performance.getEntriesByType('resource').filter(entry =>{return /viewer\.html/.test(entry.name);})[0].name);
+            // GM_download({
+            //     url:performance.getEntriesByType('resource').filter(entry =>{return /viewer\.html/.test(entry.name);})[0].name,
+            //     name:"pdf.pdf",
+            //     saveAs: true
+            // })
         };
     },2000);
 
 })();
+
