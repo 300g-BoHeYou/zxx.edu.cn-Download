@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         国家中小学智慧教育平台教材下载按钮
 // @namespace    https://greasyfork.org/zh-CN/scripts/450700
-// @version      2.2
+// @version      3.0
 // @description  用于下载国家中小学智慧教育平台的教材
 // @author       300g-BoHeYou
 // @match        https://www.zxx.edu.cn/tchMaterial/*
