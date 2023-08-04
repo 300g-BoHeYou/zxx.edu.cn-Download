@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         国家中小学智慧教育平台教材下载按钮
 // @namespace    https://greasyfork.org/zh-CN/scripts/450700
-// @version      3.0
+// @version      4.0
 // @description  用于下载国家中小学智慧教育平台的教材
 // @author       300g-BoHeYou
 // @match        https://www.zxx.edu.cn/tchMaterial/*
@@ -22,13 +22,17 @@
         download_div.style = 'width:150px;text-align:right;';
         download_div.innerHTML = '<span class="downloadbtn" style="color:white;padding:10px 20px;border-radius:10px;background:red">下载pdf</span>';
         document.getElementsByClassName("downloadbtn")[0].onclick = function(){
-            window.open(performance.getEntriesByType('resource').filter(entry =>{return /viewer\.html/.test(entry.name);})[0].name)
-            GM_log(performance.getEntriesByType('resource').filter(entry =>{return /viewer\.html/.test(entry.name);})[0].name);
-            // GM_download({
-            //     url:performance.getEntriesByType('resource').filter(entry =>{return /viewer\.html/.test(entry.name);})[0].name,
-            //     name:"pdf.pdf",
-            //     saveAs: true
-            // })
+            const url = new URL(performance.getEntriesByType('resource').filter(entry =>{return /viewer\.html/.test(entry.name);})[0].name);
+            var searchParams = new URLSearchParams(url.search);
+            var file = searchParams.getAll("file")[0];
+            var header = searchParams.getAll("headers")[0];
+            var name = document.title.split('·')[1]+".pdf";
+            GM_download({
+                url:file,
+                name:name,
+                saveAs: true,
+                headers:header
+            })
         };
     },2000);
 
